@@ -158,10 +158,26 @@
         address: document.getElementById("address").value
       };
 
-      console.log("가입 신청서 데이터:", data);
-
-      alert("신청이 완료되었습니다. 상담원이 곧 연락드립니다.");
-      event.target.reset();
+      fetch("https://script.google.com/macros/s/AKfycbymplfK2NMYxGJiCWiAWMXokTY8srxNNiwv6HxRtc1XfJAWGzlABlEtQQPv_RqzpuVW/exec", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(res => res.json())
+      .then(response => {
+        if (response.result === "succenss") {
+          alert("신청이 완료되었습니다. 상담원이 곧 연락드립니다.");
+          event.target.reset();
+        } else {
+          alert("오류가 발생했습니다. 다시 시도해주세요.");
+        }
+      })
+      .catch(err => {
+        console.error("에러:", err);
+        alert("전송실패. 관리자에게 문의하세요.");
+      });
     }
   </script>
 </body>
