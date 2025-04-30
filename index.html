@@ -1,19 +1,84 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>구글폼 신청서</title>
-</head>
-<body>
-  <h2>간단 신청서 (구글폼 전송)</h2>
-  <form action="https://docs.google.com/forms/d/e/1FAIpQLSeYNyamAvMgXwtJkmKpxquWwdW3_xKg_VFiq1nKPI9zm-oh6w/formResponse" method="POST" target="_blank" onsubmit="alert('신청이 완료되었습니다!');">
-    <label>이름:</label><br>
-    <input type="text" name="entry.304825617" required><br><br>
+<html>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <base target="_top">
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        background: #f2f4f8;
+        padding: 2rem;
+        display: flex;
+        justify-content: center;
+      }
+      form {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+      }
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+      label {
+        display: block;
+        margin-top: 1rem;
+        color: #555;
+      }
+      input, textarea {
+        width: 100%;
+        padding: 0.75rem;
+        margin-top: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+      }
+      button {
+        margin-top: 1.5rem;
+        padding: 0.75rem;
+        width: 100%;
+        background-color: #4a90e2;
+        color: white;
+        font-size: 1rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #357ab8;
+      }
+      .success {
+        text-align: center;
+        color: green;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="contact-form" method="post" action="https://script.google.com/macros/s/AKfycbyM397lNy5Qg49iMrhGPbGBzwT06nKO1ARpvbqM_nJKTT6v_SCsQr_w0-6-hoBPGzhf/exec">
+      <h2>문의하기</h2>
+      <label for="name">이름</label>
+      <input type="text" name="name" required>
 
-    <label>연락처:</label><br>
-    <input type="text" name="entry.130577546" required><br><br>
+      <label for="phone">연락처</label>
+      <input type="tel" name="phone" required>
 
-    <button type="submit">신청하기</button>
-  </form>
-</body>
+      <label for="email">이메일</label>
+      <input type="email" name="email" required>
+
+      <label for="message">문의내용</label>
+      <textarea name="message" rows="5" required></textarea>
+
+      <button type="submit">보내기</button>
+      <div class="success" id="result"></div>
+    </form>
+  </body>
 </html>
+
+
