@@ -2,11 +2,11 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>구글폼 신청서</title>
+  <title>신청서</title>
 </head>
 <body>
-  <h2>간단 신청서 (구글폼 전송)</h2>
-  <form action="https://docs.google.com/forms/d/e/1FAIpQLSeYNyamAvMgXwtJkmKpxquWwdW3_xKg_VFiq1nKPI9zm-oh6w/formResponse" method="POST" target="_blank" onsubmit="alert('신청이 완료되었습니다!');">
+  <h2>간단 신청서</h2>
+  <form id="google-form" target="hidden_iframe" onsubmit="submitted(); return false;" action="https://docs.google.com/forms/d/e/1FAIpQLSeYNyamAvMgXwtJkmKpxquWwdW3_xKg_VFiq1nKPI9zm-oh6w/formResponse" method="POST">
     <label>이름:</label><br>
     <input type="text" name="entry.304825617" required><br><br>
 
@@ -15,5 +15,14 @@
 
     <button type="submit">신청하기</button>
   </form>
+
+  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+  <script>
+    function submitted() {
+      alert("✅ 신청이 완료되었습니다!");
+      document.getElementById("google-form").reset();
+    }
+  </script>
 </body>
 </html>
