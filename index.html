@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>인터넷 가입 공식 대리점</title>
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .tab-button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      cursor: pointer;
+      background-color: #ddd;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .tab-button.active {
+      background-color: #007bff;
+      color: white;
+    }
+    .tab-content {
+      display: none;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    table {
+      width: 100%;
+      margin-top: 10px;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #aaa;
+      padding: 10px;
+      text-align: center;
+    }
+    form {
+      margin-top: 30px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+    }
+    button[type="submit"] {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>SK · LG · KT 인터넷 가입 공식 대리점</h1>
+
+  <div class="tabs">
+    <button class="tab-button active" onclick="showTab('sk')">SK</button>
+    <button class="tab-button" onclick="showTab('lg')">LG</button>
+    <button class="tab-button" onclick="showTab('kt')">KT</button>
+  </div>
+
+  <div id="sk" class="tab-content active">
+    <h2>SK 요금제</h2>
+    <table id="skTable">
+      <thead>
+        <tr><th>속도</th><th>월 요금</th><th>최대 지원금</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div id="lg" class="tab-content">
+    <h2>LG 요금제</h2>
+    <table>
+      <tr><th>속도</th><th>월 요금</th><th>최대 지원금</th></tr>
+      <tr><td>100Mbps</td><td>21,890원</td><td>최대 45만원</td></tr>
+      <tr><td>500Mbps</td><td>32,890원</td><td>최대 48만원</td></tr>
+      <tr><td>1Gbps</td><td>38,390원</td><td>최대 51만원</td></tr>
+    </table>
+  </div>
+
+  <div id="kt" class="tab-content">
+    <h2>KT 요금제</h2>
+    <table>
+      <tr><th>속도</th><th>월 요금</th><th>최대 지원금</th></tr>
+      <tr><td>100Mbps</td><td>23,100원</td><td>최대 44만원</td></tr>
+      <tr><td>500Mbps</td><td>34,100원</td><td>최대 47만원</td></tr>
+      <tr><td>1Gbps</td><td>39,600원</td><td>최대 50만원</td></tr>
+    </table>
+  </div>
+
+  <form onsubmit="submitForm(event)">
+    <h2>📋 간단 가입 신청서</h2>
+    <label>이름</label>
+    <input type="text" id="name" required />
+    
+    <label>연락처</label>
+    <input type="tel" id="phone" required />
+
+    <label>통신사</label>
+    <select id="carrier" required>
+      <option value="">선택하세요</option>
+      <option value="SK">SK</option>
+      <option value="LG">LG</option>
+      <option value="KT">KT</option>
+    </select>
+
+    <label>설치 주소</label>
+    <textarea id="address" rows="3" required></textarea>
+
+    <button type="submit">신청하기</button>
+  </form>
+
+  <script>
+    function showTab(id) {
+      const tabs = document.querySelectorAll('.tab-content');
+      const buttons = document.querySelectorAll('.tab-button');
+
+      tabs.forEach(tab => tab.classList.remove('active'));
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function submitForm(event) {
+      event.preventDefault();
+
+      const data = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        carrier: document.getElementById("carrier").value,
+        address: document.getElementById("address").value
+      };
+
+      console.log("가입 신청서 데이터:", data);
+
+      alert("신청이 완료되었습니다. 상담원이 곧 연락드립니다.");
+      event.target.reset();
+    }
+
+    const apiUrl = "https://script.google.com/macros/s/AKfycbx7Cv98vElIV7sajb86IlekY--Cabgn8bOn-SWDzwiiNnoY2YnKuPzqT60wh1iXNuPT/exec";
+
+function loadSKData() {
+  fetch(`${apiUrl}?t=${Date.now()}`)
+    .then(res => res.json())
+    .then(data => {
+      const tableBody = document.querySelector('#skTable tbody');
+      tableBody.innerHTML = "";
+
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${row['속도']}</td><td>${row['요금']}</td><td>${row['지원금']}</td>`;
+        tableBody.appendChild(tr);
+      });
+    })
+    .catch(err => {
+      console.error("데이터 로딩 실패:", err);
+    });
+}
+
+loadSKData();
+
+  </script>
+</body>
+</html>
