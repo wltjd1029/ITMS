@@ -167,7 +167,7 @@
     const apiUrl = "https://script.google.com/macros/s/AKfycbx7Cv98vElIV7sajb86IlekY--Cabgn8bOn-SWDzwiiNnoY2YnKuPzqT60wh1iXNuPT/exec";
 
 function loadSKData() {
-  fetch(apiUrl)
+  fetch(`${apiUrl}?t=${Date.now()}`)
     .then(res => res.json())
     .then(data => {
       const tableBody = document.querySelector('#skTable tbody');
