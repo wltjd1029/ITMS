@@ -163,6 +163,29 @@
       alert("신청이 완료되었습니다. 상담원이 곧 연락드립니다.");
       event.target.reset();
     }
+
+    const apiUrl = "https://script.google.com/macros/s/💡웹앱URL/exec";
+
+function loadSKData() {
+  fetch(apiUrl)
+    .then(res => res.json())
+    .then(data => {
+      const tableBody = document.querySelector('#skTable tbody');
+      tableBody.innerHTML = "";
+
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${row['속도']}</td><td>${row['요금']}</td><td>${row['지원금']}</td>`;
+        tableBody.appendChild(tr);
+      });
+    })
+    .catch(err => {
+      console.error("데이터 로딩 실패:", err);
+    });
+}
+
+loadSKData();
+
   </script>
 </body>
 </html>
