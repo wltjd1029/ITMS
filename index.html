@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>인터넷 가입 문의</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      padding: 30px;
+      background-color: #f9f9f9;
+    }
+    h2 {
+      text-align: center;
+      color: #2E8B57;
+    }
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      background-color: #2E8B57;
+      color: white;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #246c45;
+    }
+    #response {
+      margin-top: 30px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>인터넷 가입 문의</h2>
+
+  <form id="inquiryForm">
+    <label for="name">이름</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="phone">연락처</label>
+    <input type="text" id="phone" name="phone" required placeholder="예: 01012345678">
+
+    <label for="address">주소</label>
+    <input type="text" id="address" name="address" required>
+
+    <label for="type">가입유형</label>
+    <select id="type" name="type">
+      <option value="신규">신규가입</option>
+      <option value="변경">통신사 변경</option>
+      <option value="재약정">재약정</option>
+    </select>
+
+    <label for="category">상품구성</label>
+    <select id="category" name="category">
+      <option value="인터넷 단독">인터넷 단독</option>
+      <option value="인터넷+TV">인터넷 + TV</option>
+      <option value="기타">기타</option>
+    </select>
+
+    <label for="internet">인터넷 속도</label>
+    <select id="internet" name="internet">
+      <option value="100Mbps">100 Mbps</option>
+      <option value="500Mbps">500 Mbps</option>
+      <option value="1Gbps">1 Gbps</option>
+    </select>
+
+    <label for="tv">TV 구성</label>
+    <select id="tv" name="tv">
+      <option value="없음">없음</option>
+      <option value="기본형">기본형</option>
+      <option value="고급형">고급형</option>
+    </select>
+
+    <label for="etc">추가 요청사항</label>
+    <textarea id="etc" name="etc" rows="4" placeholder="문의사항을 적어주세요."></textarea>
+
+    <button type="submit">문의 접수하기</button>
+  </form>
+
+  <div id="response"></div>
+
+  <script>
+    document.getElementById("inquiryForm").addEventListener("submit", function(e) {
+      e.preventDefault(); // 폼 기본 제출 막기
+
+      const form = e.target;
+      const formData = new FormData(form);
+      const scriptURL = "https://script.google.com/macros/s/AKfycbyM397lNy5Qg49iMrhGPbGBzwT06nKO1ARpvbqM_nJKTT6v_SCsQr_w0-6-hoBPGzhf/exec";
+
+      fetch(scriptURL, {
+        method: "POST",
+        body: new URLSearchParams(formData)
+      })
+      .then(response => response.text()) // ← JSON 아님! 반드시 text()로 받기
+      .then(html => {
+        document.getElementById("response").innerHTML = html;
+        form.reset(); // 입력값 초기화
+      })
+      .catch(error => {
+        document.getElementById("response").innerHTML = `<p style="color:red;">⚠️ 오류가 발생했습니다: ${error}</p>`;
+      });
+    });
+  </script>
+
+</body>
+</html>
