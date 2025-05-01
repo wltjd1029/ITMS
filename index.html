@@ -1,84 +1,102 @@
 <!DOCTYPE html>
-<html>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <head>
-    <base target="_top">
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        font-family: 'Segoe UI', sans-serif;
-        background: #f2f4f8;
-        padding: 2rem;
-        display: flex;
-        justify-content: center;
-      }
-      form {
-        background: white;
-        padding: 2rem;
-        border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        width: 100%;
-        max-width: 500px;
-      }
-      h2 {
-        text-align: center;
-        color: #333;
-      }
-      label {
-        display: block;
-        margin-top: 1rem;
-        color: #555;
-      }
-      input, textarea {
-        width: 100%;
-        padding: 0.75rem;
-        margin-top: 0.5rem;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        font-size: 1rem;
-      }
-      button {
-        margin-top: 1.5rem;
-        padding: 0.75rem;
-        width: 100%;
-        background-color: #4a90e2;
-        color: white;
-        font-size: 1rem;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-      }
-      button:hover {
-        background-color: #357ab8;
-      }
-      .success {
-        text-align: center;
-        color: green;
-        margin-top: 1rem;
-      }
-    </style>
-  </head>
-  <body>
-    <form id="contact-form" method="post" action="https://script.google.com/macros/s/AKfycbyM397lNy5Qg49iMrhGPbGBzwT06nKO1ARpvbqM_nJKTT6v_SCsQr_w0-6-hoBPGzhf/exec">
-      <h2>문의하기</h2>
-      <label for="name">이름</label>
-      <input type="text" name="name" required>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>인터넷 가입 문의</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      padding: 30px;
+      background-color: #f9f9f9;
+    }
+    h2 {
+      text-align: center;
+      color: #2E8B57;
+    }
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      background-color: #2E8B57;
+      color: white;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #246c45;
+    }
+  </style>
+</head>
+<body>
 
-      <label for="phone">연락처</label>
-      <input type="tel" name="phone" required>
+  <h2>인터넷 가입 문의</h2>
 
-      <label for="email">이메일</label>
-      <input type="email" name="email" required>
+  <form method="post" action="https://script.google.com/macros/s/AKfycbyM397lNy5Qg49iMrhGPbGBzwT06nKO1ARpvbqM_nJKTT6v_SCsQr_w0-6-hoBPGzhf/exec">
+    <label for="name">이름</label>
+    <input type="text" id="name" name="name" required>
 
-      <label for="message">문의내용</label>
-      <textarea name="message" rows="5" required></textarea>
+    <label for="phone">연락처</label>
+    <input type="text" id="phone" name="phone" required placeholder="예: 01012345678">
 
-      <button type="submit">보내기</button>
-      <div class="success" id="result"></div>
-    </form>
-  </body>
+    <label for="address">주소</label>
+    <input type="text" id="address" name="address" required>
+
+    <label for="type">가입유형</label>
+    <select id="type" name="type">
+      <option value="신규">신규가입</option>
+      <option value="변경">통신사 변경</option>
+      <option value="재약정">재약정</option>
+    </select>
+
+    <label for="category">상품구성</label>
+    <select id="category" name="category">
+      <option value="인터넷 단독">인터넷 단독</option>
+      <option value="인터넷+TV">인터넷 + TV</option>
+      <option value="기타">기타</option>
+    </select>
+
+    <label for="internet">인터넷 속도</label>
+    <select id="internet" name="internet">
+      <option value="100Mbps">100 Mbps</option>
+      <option value="500Mbps">500 Mbps</option>
+      <option value="1Gbps">1 Gbps</option>
+    </select>
+
+    <label for="tv">TV 구성</label>
+    <select id="tv" name="tv">
+      <option value="없음">없음</option>
+      <option value="기본형">기본형</option>
+      <option value="고급형">고급형</option>
+    </select>
+
+    <label for="etc">추가 요청사항</label>
+    <textarea id="etc" name="etc" rows="4" placeholder="문의사항을 적어주세요."></textarea>
+
+    <button type="submit">문의 접수하기</button>
+  </form>
+
+</body>
 </html>
-
 
